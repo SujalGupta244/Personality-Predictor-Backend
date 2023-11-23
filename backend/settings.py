@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-rue=d6!+xfctu3w(#iz_-d04=k=pdafq%uewh3sc4gl%q!##(k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".vercel.app"]
 
 
 # Application definition
@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     'app'
 ]
 
-CORS_ALLOWED_ORIGINS = ["http://127.0.0.1:5173"]
+CORS_ALLOWED_ORIGINS = ["https://personality-predictor-frontend.vercel.app"]
 
 
 MIDDLEWARE = [
