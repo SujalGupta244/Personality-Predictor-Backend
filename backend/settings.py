@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     'app'
 ]
 
-CORS_ALLOWED_ORIGINS = ["https://personality-predictor-frontend.vercel.app/"]
+CORS_ALLOWED_ORIGINS = ["http://127.0.0.1:5173"]
 
 
 MIDDLEWARE = [
