@@ -19,6 +19,6 @@ def ml(request):
 
 
 
-
+@csrf_exempt
 def Index(request):
     return HttpResponse('<h1>This is the personality predictor backend server.</h1>')
