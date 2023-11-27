@@ -19,3 +19,4 @@ threadpoolctl==3.2.0
 tzdata==2023.3
 urllib3==2.1.0
 yarg==0.1.9
+gunicorn
