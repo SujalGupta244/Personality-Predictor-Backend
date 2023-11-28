@@ -16,7 +16,7 @@ scikit-learn
 scipy
 sklearn
 sqlparse==0.4.4
-threadpoolctl==3.2.0
+threadpoolctl
 tzdata==2023.3
 urllib3==2.1.0
 yarg==0.1.9
