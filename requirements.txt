@@ -1,2 +1,4 @@
+
+gunicorn==21.2.0
 djangorestframework==3.14.0
 joblib==1.2.0
