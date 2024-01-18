@@ -14,7 +14,6 @@ pytz==2023.3.post1
 requests==2.31.0
 scikit-learn
 scipy
-sklearn
 sqlparse==0.4.4
 threadpoolctl
 tzdata==2023.3
