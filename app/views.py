@@ -9,28 +9,28 @@ import json
 
 from .models import users_collection
 
-# import bcrypt
-import hashlib
-
-
-def hash_password(password):
-    # Choose a hashing algorithm (e.g., SHA-256)
-    hash_algorithm = hashlib.sha256()
-
-    # Update the hash object with the password encoded as bytes
-    hash_algorithm.update(password.encode('utf-8'))
-
-    # Get the hexadecimal representation of the hash
-    hashed_password = hash_algorithm.hexdigest()
-
-    return hashed_password
+import bcrypt
+# import hashlib
 
 
 # def hash_password(password):
-#     # Generate a salt and hash the password
-#     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+#     # Choose a hashing algorithm (e.g., SHA-256)
+#     hash_algorithm = hashlib.sha256()
 
-#     return hashed_password.decode('utf-8')  # Decode bytes to string for storage
+#     # Update the hash object with the password encoded as bytes
+#     hash_algorithm.update(password.encode('utf-8'))
+
+#     # Get the hexadecimal representation of the hash
+#     hashed_password = hash_algorithm.hexdigest()
+
+#     return hashed_password
+
+
+def hash_password(password):
+    # Generate a salt and hash the password
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
+    return hashed_password.decode('utf-8')  # Decode bytes to string for storage
 
 
 @csrf_exempt
