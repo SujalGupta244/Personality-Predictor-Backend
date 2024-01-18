@@ -73,6 +73,19 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'database',
+#         'CLIENT': {
+#             'host': 'your_mongo_host',
+#             'port': 27017,
+#             'username': 'your_mongo_username',
+#             'password': 'your_mongo_password',
+#             'authSource': 'your_auth_source',  # The authentication database
+#         }
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
