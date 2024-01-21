@@ -21,3 +21,4 @@ urllib3
 yarg==0.1.9
 pymongo
 bcrypt
+python-decouple

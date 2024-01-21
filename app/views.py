@@ -37,6 +37,10 @@ def hash_password(password):
 def signup(request):
     # data = request.POST.get("email")
     data = json.loads(request.body.decode('utf-8'))
+    user_data = users_collection.find_one({'email':data['email']})
+    if(user_data):
+        return JsonResponse({"message":"User already exists"}, status=409, safe=False)
+    
     user_data = {"username": data["username"], "email": data['email'], "password" : hash_password(data["password"])}
     users_collection.insert_one(user_data)
     # print(data['username'])
@@ -54,10 +58,10 @@ def login(request):
             return JsonResponse({'message':"Successfully Logged In."},safe=False)
         else:
             # Handle specific exception and return an error response
-            return JsonResponse({'error': "username or password is incorrect"},status=400)
+            return JsonResponse({'message': "username or password is incorrect"},status=400)
     except Exception as e:
         # Handle other exceptions and return a generic error response
-        return JsonResponse({'error': 'An unexpected error occurred','message':e},status=500)
+        return JsonResponse({'message': 'An unexpected error occurred','message':e},status=500)
 
 @csrf_exempt
 def logout(request):
