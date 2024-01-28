@@ -34,6 +34,15 @@ INSTALLED_APPS = [
 
 CORS_ALLOWED_ORIGINS = ["https://personality-predictor-frontend.vercel.app","http://127.0.0.1:5173"]
 # CORS_ALLOWED_ORIGINS = ["http://127.0.0.1:5173"]
+CORS_ALLOW_CREDENTIALS = True
+CSRF_COOKIE_SECURE=True
+CSRF_COOKIE_HTTP_ONLY=True
+CSRF_TRUSTED_ORIGINS=["https://personality-predictor-frontend.vercel.app","http://127.0.0.1:5173"]
+CORS_EXPOSE_HEADERS=["Content-Type","X-CSRFToken"]
+SESSION_COOKIE_SECURE=True
+CSRF_COOKIE_SAMESITE="Lax"
+SESSION_COOKIE_SAMESITE="Lax"
+
 
 
 MIDDLEWARE = [

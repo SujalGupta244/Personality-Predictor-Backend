@@ -6,4 +6,5 @@ urlpatterns = [
     path('api/',views.ml),
     path('signup/',views.signup),
     path('login/',views.login),
+    path('refresh/',views.refresh),
 ]
