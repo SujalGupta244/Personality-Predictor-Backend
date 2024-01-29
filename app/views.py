@@ -69,7 +69,7 @@ def signup(request):
 def login(request):
     try:
         data = json.loads(request.body.decode('utf-8'))
-        print(request)
+        # print(request)
         user_data = users_collection.find_one({'email':data['email']}) 
         if(not user_data):
             return JsonResponse({'message': "user not present"},status=400)
@@ -79,7 +79,7 @@ def login(request):
         payload = {'username':user_data['username'], 'email': user_data['email'], 'exp': datetime.utcnow() + timedelta(seconds=config("TOKEN_EXPIRATION_SECONDS", default=10, cast=int))}
         # print(payload)
         refresh_token = jwt.encode(payload, config("REFRESH_TOKEN_KEY",default="",cast=str), algorithm="HS256")
-        access_token = jwt.encode(payload, config("ACCESS_TOKEN_KEY"), algorithm="HS256")
+        access_token = jwt.encode({'username':user_data['username'], 'email': user_data['email'], 'exp': datetime.utcnow() + timedelta(seconds=3600)}, config("ACCESS_TOKEN_KEY"), algorithm="HS256")
 
         response = JsonResponse({'message':access_token})
         # Set JWT token as a cookie
@@ -94,15 +94,14 @@ def login(request):
 @csrf_exempt
 def logout(request):
     try:
-        data = json.loads(request.body.decode('utf-8'))
-        user_data = users_collection.find_one({'email':data['email']}) 
-        # print(hash_password(data["password"]),user_data)
-        if(user_data):
-            return JsonResponse({'message':"Successfully Logged Out."},safe=False)
-        
-    except Exception as e:
-        # Handle other exceptions and return a generic error response
-        return JsonResponse({'error': 'An unexpected error occurred','message':e},status=500)
+        # Remove the jwt token from the client side
+        response = JsonResponse({'message':'Logged out successfully.'})
+        response.delete_cookie('jwt')
+        return response
+    except jwt.ExpiredSignatureError:
+        return JsonResponse({'error': 'Token has expired'}, status=401)
+    except jwt.InvalidTokenError:
+        return JsonResponse({'error': 'Invalid Token'}, status=401)
 
 
 @csrf_exempt
@@ -125,7 +124,7 @@ def refresh(request):
             {
                 'username': user['username'],
                 'email': user['email'],
-                'exp': datetime.utcnow() + timedelta(seconds=config("TOKEN_EXPIRATION_SECONDS", default=10, cast=int))
+                'exp': datetime.utcnow() + timedelta(seconds=3600)
             },
             config("ACCESS_TOKEN_KEY", default="", cast=str),
             algorithm="HS256"
